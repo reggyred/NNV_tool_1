@@ -1,4 +1,4 @@
-package pl.sii.nnv.layout.base;
+package pl.sii.nnv.layout;
 
 import pl.sii.nnv.graph.Graph;
 

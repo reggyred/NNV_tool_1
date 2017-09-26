@@ -1,4 +1,4 @@
-package pl.sii.nnv.layout.basic;
+package pl.sii.nnv.layout;
 
 import java.util.HashMap;
 import java.util.List;
@@ -7,7 +7,6 @@ import java.util.Random;
 
 import pl.sii.nnv.graph.Cell;
 import pl.sii.nnv.graph.Graph;
-import pl.sii.nnv.layout.base.Layout;
 
 public class BasicLayout extends Layout {
 

@@ -16,8 +16,8 @@ import javafx.stage.Stage;
 import pl.sii.nnv.graph.CellType;
 import pl.sii.nnv.graph.Graph;
 import pl.sii.nnv.graph.Model;
-import pl.sii.nnv.layout.base.Layout;
-import pl.sii.nnv.layout.basic.BasicLayout;
+import pl.sii.nnv.layout.BasicLayout;
+import pl.sii.nnv.layout.Layout;
 import pl.sii.nnv.view.MainViewController;
 
 public class MainApp extends Application {
