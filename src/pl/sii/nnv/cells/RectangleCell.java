@@ -8,18 +8,6 @@ import pl.sii.nnv.graph.Cell;
 
 public class RectangleCell extends Cell {
 
-	public RectangleCell(int id) {
-		super(id);
-
-		Rectangle view = new Rectangle(50, 50);
-		
-		view.setStroke(Color.BLACK);
-		view.setFill(Color.LAVENDER);
-
-		setView(view);
-
-	}
-
 	public RectangleCell(int id, int cellLayer, List<Integer> parentsID) {
 		super(id, cellLayer, parentsID);
 

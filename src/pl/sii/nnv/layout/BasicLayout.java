@@ -14,19 +14,19 @@ public class BasicLayout extends Layout {
 
 	Random rnd = new Random();
 
+	int maxColumn;
 	int maxOrder;
-	int maxLayer;
 	int maxWidth;
 	int maxHeight;
-	final int layerHeight = 100;
-	final int orderWidth = 75;
-	int[] ordersInLayers;
+	final int OrderHeight = 100;
+	final int ColumnWidth = 75;
+	int[] ColumnsInOrders;
 
 	public BasicLayout(Graph graph) {
 		super(graph);
 		this.graph = graph;
+		maxColumn = 0;
 		maxOrder = 0;
-		maxLayer = 0;
 
 	}
 
@@ -36,30 +36,30 @@ public class BasicLayout extends Layout {
 
 		for (Cell cell : cells) {
 
-			if (cell.getLayer() > maxLayer) {
-				maxLayer = cell.getLayer();
-
-			}
-
-		}
-		ordersInLayers = new int[maxLayer + 1];
-		for (Cell cell : cells) {
-			cell.setOrder(ordersInLayers[cell.getLayer()]++);
-
 			if (cell.getOrder() > maxOrder) {
 				maxOrder = cell.getOrder();
+
+			}
+
+		}
+		ColumnsInOrders = new int[maxOrder + 1];
+		for (Cell cell : cells) {
+			cell.setColumn(ColumnsInOrders[cell.getOrder()]++);
+
+			if (cell.getColumn() > maxColumn) {
+				maxColumn = cell.getColumn();
 			}
 		}
 
-		maxWidth = maxOrder * orderWidth + 80;
-		maxHeight = maxLayer * layerHeight + 80;
+		maxWidth = maxColumn * ColumnWidth + 80;
+		maxHeight = maxOrder * OrderHeight + 80;
 
 		for (Cell cell : cells) {
 			int x;
 			int y;
-			int cellLayer = cell.getLayer();
-			y = maxHeight - 25 - cellLayer * layerHeight;
-			x = maxWidth / (ordersInLayers[cellLayer] + 1) * (cell.getOrder() + 1);
+			int cellOrder = cell.getOrder();
+			y = maxHeight - 25 - cellOrder * OrderHeight;
+			x = maxWidth / (ColumnsInOrders[cellOrder] + 1) * (cell.getColumn() + 1);
 
 			cell.relocate(x, y);
 		}

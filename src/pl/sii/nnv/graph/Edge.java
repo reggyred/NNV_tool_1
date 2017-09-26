@@ -3,11 +3,30 @@ package pl.sii.nnv.graph;
 import javafx.scene.Group;
 import javafx.scene.shape.Line;
 
+/**
+ * Edge class instance is representing connection between cells.
+ * 
+ * @author preddig
+ *
+ */
 public class Edge extends Group {
-
+	/**
+	 * Cell that connection is pointing out from.
+	 */
 	protected Cell source;
+	/**
+	 * Cell that connection is pointing to.
+	 */
 	protected Cell target;
-
+	/**
+	 * Enumerated type of connection.
+	 */
+	EdgeType connectionType;
+	/**
+	 * 
+	 */
+	String connectionName;
+	int dimension;
 	Line line;
 
 	public Edge(Cell source, Cell target) {
@@ -16,7 +35,7 @@ public class Edge extends Group {
 		this.target = target;
 
 		source.addCellChild(target);
-		target.addCellParent(source);
+		target.addCellTopLayer(source);
 
 		line = new Line();
 

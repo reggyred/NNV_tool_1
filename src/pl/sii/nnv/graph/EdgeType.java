@@ -1,6 +1,6 @@
-package pl.sii.nnv.guimodel;
+package pl.sii.nnv.graph;
 
-public enum ConnectionType {
+public enum EdgeType {
 	DATAFLOWCONNECTION,
 	CONTROLCONNECTION,
 	REFERENCECONNECTION

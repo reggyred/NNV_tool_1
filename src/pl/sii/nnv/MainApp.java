@@ -19,7 +19,11 @@ import pl.sii.nnv.graph.Model;
 import pl.sii.nnv.layout.BasicLayout;
 import pl.sii.nnv.layout.Layout;
 import pl.sii.nnv.view.MainViewController;
-
+/**
+ * Extends Application class. Instance of this class is created upon running of application.
+ * @author preddig
+ *
+ */
 public class MainApp extends Application {
 
 	Stage primaryStage;
@@ -28,6 +32,11 @@ public class MainApp extends Application {
 	BorderPane mainBorderPane;
 	Graph graph = new Graph();
 	
+	/**
+	 * Is called upon start of execution of JavaFX application. Calls methods loading interface layout. 
+	 * 
+	 *  @param primaryStage reference to application main window.
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -40,6 +49,9 @@ public class MainApp extends Application {
 		
 	}
 
+	/**
+	 * Loads main window toolbar (upper bar) layout from resource file.
+	 */
 	public void initRootLayout() {
 		try{
 			//Load root layout from fxml file
@@ -56,6 +68,9 @@ public class MainApp extends Application {
 		}
 	}
 	
+	/**
+	 * Loads main window layout from resource file.
+	 */
 	public void showMainView() {
 		try {
 			//Load mainView layout from fxml file
@@ -86,11 +101,15 @@ public class MainApp extends Application {
 		
 	}
 	
-	
+	/**
+	 * Main function called when application is launched.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}
 	
+	//To be cut for documentation
 	private void addGraphComponents() {
 
 		Model model = graph.getModel();

@@ -75,27 +75,27 @@ public class Model {
 		return allEdges;
 	}
 
-	public void addCell(int id, CellType type) {
-
-		switch (type) {
-
-		case RECTANGLE:
-			RectangleCell rectangleCell = new RectangleCell(id);
-			addCell(rectangleCell);
-			break;
-		case LABEL:
-			LabelCell labelCell = new LabelCell(id);
-			addCell(labelCell);
-			break;
-		case TITLEDPANE:
-			TitledPaneCell titledPaneCell = new TitledPaneCell(id, "Sample", new Label("Sample content"));
-			addCell(titledPaneCell);
-			break;
-
-		default:
-			throw new UnsupportedOperationException("Unsupported type: " + type);
-		}
-	}
+//	public void addCell(int id, CellType type) {
+//
+//		switch (type) {
+//
+//		case RECTANGLE:
+//			RectangleCell rectangleCell = new RectangleCell(id);
+//			addCell(rectangleCell);
+//			break;
+//		case LABEL:
+//			LabelCell labelCell = new LabelCell(id);
+//			addCell(labelCell);
+//			break;
+//		case TITLEDPANE:
+//			TitledPaneCell titledPaneCell = new TitledPaneCell(id, "Sample", new Label("Sample content"));
+//			addCell(titledPaneCell);
+//			break;
+//
+//		default:
+//			throw new UnsupportedOperationException("Unsupported type: " + type);
+//		}
+//	}
 
 	public void addCell(int id, CellType type, int cellLayer, List<Integer> parentsID) {
 
@@ -129,23 +129,6 @@ public class Model {
 		addedEdges.add(edge);
 
 	}
-
-//	public void addEdges() {
-//
-//		for (Cell cell : addedCells) {
-//			if (cell.parentsID != null) {
-//				for (Integer parID : cell.parentsID) {
-//
-//					Cell sourceCell = cellMap.get(parID);
-//					Cell targetCell = cellMap.get(cell.cellId);
-//					Edge edge = new Edge(sourceCell, targetCell);
-//
-//					addedEdges.add(edge);
-//				}
-//			}
-//		}
-//
-//	}
 	
 	public void addEdges() {
 
@@ -170,7 +153,7 @@ public class Model {
 	public void attachOrphansToGraphParent(List<Cell> cellList) {
 
 		for (Cell cell : cellList) {
-			if (cell.getCellParents().size() == 0) {
+			if (cell.getCellTopLayer().size() == 0) {
 				graphParent.addCellChild(cell);
 			}
 		}
