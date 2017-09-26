@@ -67,18 +67,13 @@ public class MainApp extends Application {
 			// Set main view into center of root layout
 			rootLayout.setCenter(mainView);
 			mainBorderPane = mainViewControler.getMainBorderPane();
-		//	mainAnchorPane.getChildren().add(new Label("My test label in Main Anchor Pane"));
-	
-			//ObservableList<Node> mainViewChildren = mainView.getChildren();
-			//System.out.println(mainViewChildren);
-			
+				
 			graph = new Graph();
 			mainBorderPane.setCenter(graph.getScrollPane());
 			addGraphComponents();
 			Layout layout = new BasicLayout(graph);
 			layout.execute();
-			//mainView
-			
+	
 			
 			
 			
@@ -123,40 +118,10 @@ public class MainApp extends Application {
 		cellParents4.add(5);
 		model.addCell(6, CellType.RECTANGLE, 3, cellParents4);
 		model.addCell(7, CellType.RECTANGLE, 3, cellParents4);
-//		cellParents.clear();
-//		cellParents.add(5);
-//		cellParents.add(6);
-//		cellParents.add(7);
-//		model.addCell(8, CellType.RECTANGLE, 4, cellParents);
-//		model.addCell(9, CellType.RECTANGLE, 4, cellParents);
-//		model.addCell(10, CellType.RECTANGLE, 5, null);
-//		model.addCell(11, CellType.RECTANGLE, 5, null);
-//		model.addCell(12, CellType.RECTANGLE, 6, null);
-//		model.addCell(13, CellType.RECTANGLE, 6, null);
-//		model.addCell(14, CellType.RECTANGLE, 6, null);
-//		model.addCell(15, CellType.RECTANGLE, 7, null);
-//		model.addCell(16, CellType.RECTANGLE, 8, null);
-//		model.addCell(17, CellType.RECTANGLE, 8, null);
-//		model.addCell(18, CellType.RECTANGLE, 8, null);
-//		model.addCell(19, CellType.RECTANGLE, 8, null);
-//		model.addCell(20, CellType.RECTANGLE, 8, null);
-//		model.addCell(21, CellType.RECTANGLE, 9, null);
-//		model.addCell(22, CellType.RECTANGLE, 9, null);
-//		model.addCell(23, CellType.RECTANGLE, 9, null);
+
 
 		model.addEdges();
 		
-//		model.addEdge(0, 1);
-//		model.addEdge(0, 2);
-//		model.addEdge(2, 3);
-//		model.addEdge(2, 3);
-//		model.addEdge(3, 4);
-//		model.addEdge(4, 7);
-//		model.addEdge(4, 8);
-//		model.addEdge(8, 9);
-//		model.addEdge(9, 10);
-//		model.addEdge(10, 11);
-//		model.addEdge(9, 11);
 
 		graph.endUpdate();
 

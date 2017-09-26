@@ -6,11 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import javafx.scene.control.Label;
-import pl.sii.nnv.cells.CircleCell;
 import pl.sii.nnv.cells.LabelCell;
 import pl.sii.nnv.cells.RectangleCell;
 import pl.sii.nnv.cells.TitledPaneCell;
-import pl.sii.nnv.cells.TriangleCell;
 
 public class Model {
 
@@ -84,15 +82,6 @@ public class Model {
 		case RECTANGLE:
 			RectangleCell rectangleCell = new RectangleCell(id);
 			addCell(rectangleCell);
-			break;
-
-		case TRIANGLE:
-			TriangleCell triangleCell = new TriangleCell(id);
-			addCell(triangleCell);
-			break;
-		case CIRCLE:
-			CircleCell circleCell = new CircleCell(id);
-			addCell(circleCell);
 			break;
 		case LABEL:
 			LabelCell labelCell = new LabelCell(id);
