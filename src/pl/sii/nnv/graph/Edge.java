@@ -23,12 +23,23 @@ public class Edge extends Group {
 	 */
 	EdgeType connectionType;
 	/**
-	 * 
+	 * Name to be displayed in the label next to connection.
 	 */
 	String connectionName;
+	/**
+	 * Size (i.e array dimensions) of data flowing thru connection. 
+	 */
 	int dimension;
+	/**
+	 * Graphical object representing connection on the graph.
+	 */
 	Line line;
 
+	/**
+	 * Basic constructor for edge (connector) object.
+	 * @param source
+	 * @param target
+	 */
 	public Edge(Cell source, Cell target) {
 
 		this.source = source;
@@ -48,11 +59,30 @@ public class Edge extends Group {
 		getChildren().add(line);
 
 	}
+	/**
+	 * Extended contructor for edge (connector) object.
+	 * @param source
+	 * @param target
+	 * @param connectionType
+	 * @param connectionName
+	 * @param dimension
+	 */
+	public Edge(Cell source, Cell target, EdgeType connectionType, String connectionName, int dimension) {
+	
+	}
 
+	/**
+	 * Used to get source cell of edge instance.
+	 * @return
+	 */
 	public Cell getSource() {
 		return source;
 	}
 
+	/**
+	 * Used to get target cell of edge instance.
+	 * @return
+	 */
 	public Cell getTarget() {
 		return target;
 	}

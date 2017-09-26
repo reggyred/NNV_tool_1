@@ -10,20 +10,54 @@ import pl.sii.nnv.cells.LabelCell;
 import pl.sii.nnv.cells.RectangleCell;
 import pl.sii.nnv.cells.TitledPaneCell;
 
+/**
+ * Model is class, which instance stores lists of all added cells (nodes) and
+ * edges (connectors). It is a part of Model class.
+ * 
+ * @author preddig
+ *
+ */
 public class Model {
-
+	/**
+	 * graphParent is cell that all other cells origin from.
+	 */
 	Cell graphParent;
-
+	/**
+	 * Lists all cells that are currently displayed.
+	 */
 	List<Cell> allCells;
+	/**
+	 * Lists all cells that have been added during update, but
+	 * but not yet processed.
+	 */
 	List<Cell> addedCells;
+	/**
+	 * Lists all cells that have been removed during update,
+	 * but not yet processed.
+	 */
 	List<Cell> removedCells;
-
+	/**
+	 * Lists all edges that are currently displayed.
+	 */
 	List<Edge> allEdges;
+	/**
+	 * Lists all edges that have been added during update, but
+	 * but not yet processed.
+	 */
 	List<Edge> addedEdges;
+	/**
+	 * Lists all edges that have been removed during update,
+	 * but not yet processed.
+	 */
 	List<Edge> removedEdges;
-
+	/**
+	 * Stores map of cell IDs and cell instances.
+	 */
 	Map<Integer, Cell> cellMap; // <id,cell>
 
+	/**
+	 * Default constructor. Initializes graphParent and all lists/maps.
+	 */
 	public Model() {
 
 		graphParent = new Cell(0);
@@ -31,7 +65,9 @@ public class Model {
 		// clear model, create lists
 		clear();
 	}
-
+	/**
+	 * Initializes all lists/maps with new objects.
+	 */
 	public void clear() {
 
 		allCells = new ArrayList<>();
@@ -45,58 +81,63 @@ public class Model {
 		cellMap = new HashMap<>(); // <id,cell>
 
 	}
-
+	/**
+	 * Clears lists of added cells and edges.
+	 */
 	public void clearAddedLists() {
 		addedCells.clear();
 		addedEdges.clear();
 	}
-
+	/**
+	 * Returns list of added cells during current update.
+	 * @return list of added cells
+	 */
 	public List<Cell> getAddedCells() {
 		return addedCells;
 	}
-
+	/**
+	 * Returns list of removed cells during current update.
+	 * @return list of removed cells
+	 */
 	public List<Cell> getRemovedCells() {
 		return removedCells;
 	}
 
+	/**
+	 * Returns list of all cells.
+	 * @return list of all cells.
+	 */
 	public List<Cell> getAllCells() {
 		return allCells;
 	}
-
+	/**
+	 * Returns list of added edges during current update.
+	 * @return list of added edges.
+	 */
 	public List<Edge> getAddedEdges() {
 		return addedEdges;
 	}
-
+	/**
+	 * Returns list of removed edges during current update.
+	 * @return list of removed edges.
+	 */
 	public List<Edge> getRemovedEdges() {
 		return removedEdges;
 	}
-
+/**
+ * Returns list of all edges.
+ * @return list of all edges.
+ */
 	public List<Edge> getAllEdges() {
 		return allEdges;
 	}
-
-//	public void addCell(int id, CellType type) {
-//
-//		switch (type) {
-//
-//		case RECTANGLE:
-//			RectangleCell rectangleCell = new RectangleCell(id);
-//			addCell(rectangleCell);
-//			break;
-//		case LABEL:
-//			LabelCell labelCell = new LabelCell(id);
-//			addCell(labelCell);
-//			break;
-//		case TITLEDPANE:
-//			TitledPaneCell titledPaneCell = new TitledPaneCell(id, "Sample", new Label("Sample content"));
-//			addCell(titledPaneCell);
-//			break;
-//
-//		default:
-//			throw new UnsupportedOperationException("Unsupported type: " + type);
-//		}
-//	}
-
+/**
+ * Adds new cell of given type to the graph model.
+ * @param id
+ * @param type
+ * @param cellLayer
+ * @param parentsID
+ */
 	public void addCell(int id, CellType type, int cellLayer, List<Integer> parentsID) {
 
 		switch (type) {
@@ -129,12 +170,12 @@ public class Model {
 		addedEdges.add(edge);
 
 	}
-	
+
 	public void addEdges() {
 
 		cellMap.forEach((cellID, cell) -> {
-			if (cell.parentsID != null){
-				for (Integer parID : cell.parentsID){
+			if (cell.parentsID != null) {
+				for (Integer parID : cell.parentsID) {
 					Cell sourceCell = cellMap.get(parID);
 					Cell targetCell = cellMap.get(cell.cellId);
 					Edge edge = new Edge(sourceCell, targetCell);

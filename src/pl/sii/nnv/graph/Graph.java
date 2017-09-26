@@ -1,27 +1,40 @@
 package pl.sii.nnv.graph;
 
+
 import javafx.scene.Group;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import pl.sii.nnv.cells.TitledPaneCell;
-
+/**
+ * Graph is class of main object that connects instances and functionality of other objects
+ * responsible for drawing cells, edges and navigation over graph. 
+ * @author preddig
+ *
+ */
 public class Graph {
-
+/**
+ * Stores and perform operations on lists of cells and edges. 
+ */
 	private Model model;
-
+/**
+ * GUI element from JavaFX library that stores other graphical objects.
+ */
 	private Group canvas;
-
+/**
+ * GUI element that allows view of the graph to be zoomed and moved around.
+ */
 	private ZoomableScrollPane scrollPane;
-
+/**
+ * Interface element that handles mouse events for scrolling and zooming.
+ */
 	MouseGestures mouseGestures;
-
-	/**
-	 * the pane wrapper is necessary or else the scrollpane would always align
-	 * the top-most and left-most child to the top and left eg when you drag the
-	 * top child down, the entire scrollpane would move down
-	 */
+/**
+ * CellLayer is used to proper alignment of graph in zoomable scroll panel.
+ */
 	CellLayer cellLayer;
-
+/**
+ * Constructor for Graph class instance. Initializes field with default values.
+ */
 	public Graph() {
 
 		this.model = new Model();
@@ -39,22 +52,37 @@ public class Graph {
 		scrollPane.setFitToHeight(true);
 
 	}
-
+/**
+ * Returns scrollPane object.
+ * @return scrollPane object.
+ */
 	public ScrollPane getScrollPane() {
 		return this.scrollPane;
 	}
-
+/**
+ * Returns cellLayer object.
+ * @return cellLayer object.
+ */
 	public Pane getCellLayer() {
 		return this.cellLayer;
 	}
-
+/**
+ * Returns model object.
+ * @return model object.
+ */
 	public Model getModel() {
 		return model;
 	}
 
+/**
+ * Set of activities performed before updating graph.
+ */
 	public void beginUpdate() {
 	}
 
+/**
+ * Set of activites performed after updating graph.
+ */
 	public void endUpdate() {
 
 		// add components to graph pane
@@ -81,6 +109,10 @@ public class Graph {
 
 	}
 
+/**
+ * Returns current scale of scrollPane.
+ * @return current scale.
+ */
 	public double getScale() {
 		return this.scrollPane.getScaleValue();
 	}

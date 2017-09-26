@@ -1,5 +1,5 @@
 package pl.sii.nnv.graph;
-/*
+/**
  * Enumerator for different CellTypes
  */
 public enum CellType {
