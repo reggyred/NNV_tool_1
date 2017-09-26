@@ -2,6 +2,11 @@ package pl.sii.nnv.layout;
 
 import pl.sii.nnv.graph.Graph;
 
+/**
+ * Abstract base class of layout algorithms.
+ * @author preddig
+ *
+ */
 public abstract class Layout {
 
 	Graph graph;

@@ -1,4 +1,4 @@
-package pl.sii.nnv.model;
+package pl.sii.nnv.guimodel;
 
 public class Connection {
 

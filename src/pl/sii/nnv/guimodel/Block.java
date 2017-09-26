@@ -1,4 +1,4 @@
-package pl.sii.nnv.model;
+package pl.sii.nnv.guimodel;
 
 import java.util.ArrayList;
 
@@ -11,33 +11,33 @@ public class Block {
 	String blockName;
 	String blockGroup;
 	BlockType blockType;
-	int blockLayer;
 	int blockOrder;
+	int blockColumn;
 	String value;
 	Point2D position;
 
-	ArrayList<Integer> blockParents = new ArrayList<Integer>();
-	ArrayList<Integer> blockChilds = new ArrayList<Integer>();
-
-	public Block(String blockName, String blockGroup, BlockType blockType, int blockLayer, int blockOrder,
+	ArrayList<Connection> blockParents = new ArrayList<Connection>();
+	ArrayList<Block> nestedBlocks = new ArrayList<Block>();
+	
+	public Block(String blockName, String blockGroup, BlockType blockType, int blockOrder, int blockColumn,
 			String value) {
 		blockID = nextID;
 		nextID++;
 		this.blockName = blockName;
 		this.blockGroup = blockGroup;
 		this.blockType = blockType;
-		this.blockLayer = blockLayer;
 		this.blockOrder = blockOrder;
+		this.blockColumn = blockColumn;
 		this.value = value;
 		position = new Point2D(0, 0);
 	}
 
-	public void setBlockLayer(int layer) {
-		blockLayer = layer;
+	public void setBlockColumn(int column) {
+		blockColumn = column;
 	}
 
-	public int getBlockLayer() {
-		return blockLayer;
+	public int getBlockColumn() {
+		return blockColumn;
 	}
 
 	public void setBlockOrder(int order) {
