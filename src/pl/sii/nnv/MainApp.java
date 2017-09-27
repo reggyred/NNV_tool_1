@@ -109,7 +109,9 @@ public class MainApp extends Application {
 		launch(args);
 	}
 	
-	//To be cut for documentation
+	/**
+	 * Loads graph components.
+	 */
 	private void addGraphComponents() {
 
 		Model model = graph.getModel();
@@ -122,21 +124,21 @@ public class MainApp extends Application {
 		List<Integer> cellParents4 = new ArrayList<>();
 		cellParents1.add(0);
 		
-		model.addCell(0, CellType.RECTANGLE, 0, null);
-		model.addCell(1, CellType.RECTANGLE, 1, cellParents1);
-		model.addCell(2, CellType.RECTANGLE, 1, cellParents1);
+		model.addCell(0, CellType.RECTANGLE, 0, null,  null);
+		model.addCell(1, CellType.RECTANGLE, 1, cellParents1, null);
+		model.addCell(2, CellType.RECTANGLE, 1, cellParents1, null);
 		cellParents2.add(1);
 		cellParents2.add(2);
-		model.addCell(3, CellType.RECTANGLE, 2, cellParents2);
-		model.addCell(4, CellType.RECTANGLE, 2, cellParents2);
+		model.addCell(3, CellType.RECTANGLE, 2, cellParents2, null);
+		model.addCell(4, CellType.RECTANGLE, 2, cellParents2, null);
 		cellParents3.add(3);
 		cellParents3.add(4);
-		model.addCell(5, CellType.RECTANGLE, 3, cellParents3);
+		model.addCell(5, CellType.RECTANGLE, 3, cellParents3, null);
 		cellParents4.clear();
 		cellParents4.add(4);
 		cellParents4.add(5);
-		model.addCell(6, CellType.RECTANGLE, 3, cellParents4);
-		model.addCell(7, CellType.RECTANGLE, 3, cellParents4);
+		model.addCell(6, CellType.RECTANGLE, 3, cellParents4, null);
+		model.addCell(7, CellType.RECTANGLE, 3, cellParents4, null);
 
 
 		model.addEdges();

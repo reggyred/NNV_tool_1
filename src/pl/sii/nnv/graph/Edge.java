@@ -46,7 +46,7 @@ public class Edge extends Group {
 		this.target = target;
 
 		source.addCellChild(target);
-		target.addCellTopLayer(source);
+		target.addCellParent(source);
 
 		line = new Line();
 

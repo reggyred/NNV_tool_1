@@ -4,73 +4,106 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * Class that handles mouse gestures over cells/nodes.
+ * 
+ * @author preddig
+ *
+ */
 public class MouseGestures {
 
-    final DragContext dragContext = new DragContext();
+	/**
+	 * Used in drag gesture.
+	 */
+	final DragContext dragContext = new DragContext();
+	/**
+	 * Reference to graph that is object of mouse gestures.
+	 */
+	Graph graph;
 
-    Graph graph;
+	/**
+	 * Constructor for mouse gestures handler for given graph.
+	 * 
+	 * @param graph
+	 */
+	public MouseGestures(Graph graph) {
+		this.graph = graph;
+	}
 
-    public MouseGestures( Graph graph) {
-        this.graph = graph;
-    }
+	/**
+	 * Enables dragging of node.
+	 * 
+	 * @param node
+	 */
+	public void makeDraggable(final Node node) {
 
-    public void makeDraggable( final Node node) {
+		node.setOnMousePressed(onMousePressedEventHandler);
+		node.setOnMouseDragged(onMouseDraggedEventHandler);
+		node.setOnMouseReleased(onMouseReleasedEventHandler);
 
+	}
 
-        node.setOnMousePressed(onMousePressedEventHandler);
-        node.setOnMouseDragged(onMouseDraggedEventHandler);
-        node.setOnMouseReleased(onMouseReleasedEventHandler);
+	/**
+	 * Handler for event of mouse button press on node.
+	 */
+	EventHandler<MouseEvent> onMousePressedEventHandler = new EventHandler<MouseEvent>() {
 
-    }
+		@Override
+		public void handle(MouseEvent event) {
 
-    EventHandler<MouseEvent> onMousePressedEventHandler = new EventHandler<MouseEvent>() {
+			Node node = (Node) event.getSource();
 
-        @Override
-        public void handle(MouseEvent event) {
+			double scale = graph.getScale();
 
-            Node node = (Node) event.getSource();
+			dragContext.x = node.getBoundsInParent().getMinX() * scale - event.getScreenX();
+			dragContext.y = node.getBoundsInParent().getMinY() * scale - event.getScreenY();
 
-            double scale = graph.getScale();
+		}
+	};
+	/**
+	 * Handler for event of dragging with mouse button pressed on node.
+	 */
+	EventHandler<MouseEvent> onMouseDraggedEventHandler = new EventHandler<MouseEvent>() {
 
-            dragContext.x = node.getBoundsInParent().getMinX() * scale - event.getScreenX();
-            dragContext.y = node.getBoundsInParent().getMinY()  * scale - event.getScreenY();
+		@Override
+		public void handle(MouseEvent event) {
 
-        }
-    };
+			Node node = (Node) event.getSource();
 
-    EventHandler<MouseEvent> onMouseDraggedEventHandler = new EventHandler<MouseEvent>() {
+			double offsetX = event.getScreenX() + dragContext.x;
+			double offsetY = event.getScreenY() + dragContext.y;
 
-        @Override
-        public void handle(MouseEvent event) {
+			// adjust the offset in case we are zoomed
+			double scale = graph.getScale();
 
-            Node node = (Node) event.getSource();
+			offsetX /= scale;
+			offsetY /= scale;
 
-            double offsetX = event.getScreenX() + dragContext.x;
-            double offsetY = event.getScreenY() + dragContext.y;
+			node.relocate(offsetX, offsetY);
 
-            // adjust the offset in case we are zoomed
-            double scale = graph.getScale();
+		}
+	};
+	/**
+	 * Handler for releasing mouse button on the node.
+	 */
+	EventHandler<MouseEvent> onMouseReleasedEventHandler = new EventHandler<MouseEvent>() {
 
-            offsetX /= scale;
-            offsetY /= scale;
+		@Override
+		public void handle(MouseEvent event) {
 
-            node.relocate(offsetX, offsetY);
+		}
+	};
 
-        }
-    };
+	/**
+	 * Subclass that stores xy coordinates for drag mouse gesture.
+	 * 
+	 * @author preddig
+	 *
+	 */
+	class DragContext {
 
-    EventHandler<MouseEvent> onMouseReleasedEventHandler = new EventHandler<MouseEvent>() {
+		double x;
+		double y;
 
-        @Override
-        public void handle(MouseEvent event) {
-
-        }
-    };
-
-    class DragContext {
-
-        double x;
-        double y;
-
-    }
+	}
 }

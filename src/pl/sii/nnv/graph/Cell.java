@@ -49,9 +49,13 @@ public class Cell extends Pane {
 	 */
 	List<Integer> parentsID = new ArrayList<>();
 	/**
-	 * List of nested cells inside given cell.
+	 * List of children cells inside given cell.
 	 */
 	List<Cell> children = new ArrayList<>();
+	/**
+	 * List of parents cells of given cell.
+	 */
+	List<Cell> parents = new ArrayList<>();
 	/**
 	 * List of cells inside which given cell is nested.
 	 */
@@ -75,36 +79,55 @@ public class Cell extends Pane {
 
 	/**
 	 * Standard constructor for cell class object.
-	 * 
 	 * @param cellId
 	 * @param cellOrder
 	 * @param parentsID
+	 * @param children
+	 * @param topLayer
 	 */
-	public Cell(int cellId, int cellOrder, List<Integer> parentsID) {
+	public Cell(int cellId, int cellOrder, List<Integer> parentsID, List<Cell> topLayer) {
 		this.cellId = cellId;
 		this.cellOrder = cellOrder;
 		this.cellColumn = 0;
 		this.parentsID = parentsID;
+		this.topLayer = topLayer;
 		this.getChildren().addAll(new Label(Integer.toString(cellId)));
 	}
 
 	/**
-	 * Used to add cell as a child (nested) cell.
+	 * Used to add cell as a child cell.
 	 * 
-	 * @param cell
-	 *            to be added
+	 * @param cell to be added
 	 */
 	public void addCellChild(Cell cell) {
 		children.add(cell);
 	}
 
 	/**
-	 * Used to get list of all child (nested) cells.
+	 * Used to get list of all child cells.
 	 * 
 	 * @return list of child cells
 	 */
 	public List<Cell> getCellChildren() {
 		return children;
+	}
+	
+	/**
+	 * Used to add cell as a child cell.
+	 * 
+	 * @param cell to be added
+	 */
+	public void addCellParent(Cell cell) {
+		parents.add(cell);
+	}
+
+	/**
+	 * Used to get list of all child cells.
+	 * 
+	 * @return list of child cells
+	 */
+	public List<Cell> getCellParents() {
+		return parents;
 	}
 
 	/**

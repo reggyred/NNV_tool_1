@@ -5,11 +5,22 @@ import java.util.List;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import pl.sii.nnv.graph.Cell;
-
+/**
+ * Class for rectangle shape cell.
+ * @author preddig
+ *
+ */
 public class RectangleCell extends Cell {
 
-	public RectangleCell(int id, int cellLayer, List<Integer> parentsID) {
-		super(id, cellLayer, parentsID);
+	/**
+	 * Constructor for rectangle shape cell. Creates Rectangle JavaFX node.
+	 * @param id
+	 * @param cellLayer
+	 * @param parentsID
+	 * @param topLayer
+	 */
+	public RectangleCell(int id, int cellLayer, List<Integer> parentsID, List<Cell> topLayer) {
+		super(id, cellLayer, parentsID, topLayer);
 
 		Rectangle view = new Rectangle(50, 50);
 		view.setArcHeight(8);

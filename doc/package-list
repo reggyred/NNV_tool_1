@@ -1,0 +1,9 @@
+caffe
+com.google.protobuf
+org.tensorflow.framework
+pl.sii.nnv
+pl.sii.nnv.cells
+pl.sii.nnv.graph
+pl.sii.nnv.layout
+pl.sii.nnv.parse
+pl.sii.nnv.view

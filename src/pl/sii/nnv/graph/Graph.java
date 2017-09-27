@@ -4,7 +4,6 @@ package pl.sii.nnv.graph;
 import javafx.scene.Group;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
-import pl.sii.nnv.cells.TitledPaneCell;
 /**
  * Graph is class of main object that connects instances and functionality of other objects
  * responsible for drawing cells, edges and navigation over graph. 

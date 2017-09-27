@@ -8,11 +8,10 @@ import java.util.Map;
 import javafx.scene.control.Label;
 import pl.sii.nnv.cells.LabelCell;
 import pl.sii.nnv.cells.RectangleCell;
-import pl.sii.nnv.cells.TitledPaneCell;
 
 /**
  * Model is class, which instance stores lists of all added cells (nodes) and
- * edges (connectors). It is a part of Model class.
+ * edges (connectors). It is a part of graph class.
  * 
  * @author preddig
  *
@@ -27,13 +26,13 @@ public class Model {
 	 */
 	List<Cell> allCells;
 	/**
-	 * Lists all cells that have been added during update, but
-	 * but not yet processed.
+	 * Lists all cells that have been added during update, but but not yet
+	 * processed.
 	 */
 	List<Cell> addedCells;
 	/**
-	 * Lists all cells that have been removed during update,
-	 * but not yet processed.
+	 * Lists all cells that have been removed during update, but not yet
+	 * processed.
 	 */
 	List<Cell> removedCells;
 	/**
@@ -41,13 +40,13 @@ public class Model {
 	 */
 	List<Edge> allEdges;
 	/**
-	 * Lists all edges that have been added during update, but
-	 * but not yet processed.
+	 * Lists all edges that have been added during update, but but not yet
+	 * processed.
 	 */
 	List<Edge> addedEdges;
 	/**
-	 * Lists all edges that have been removed during update,
-	 * but not yet processed.
+	 * Lists all edges that have been removed during update, but not yet
+	 * processed.
 	 */
 	List<Edge> removedEdges;
 	/**
@@ -65,6 +64,7 @@ public class Model {
 		// clear model, create lists
 		clear();
 	}
+
 	/**
 	 * Initializes all lists/maps with new objects.
 	 */
@@ -81,6 +81,7 @@ public class Model {
 		cellMap = new HashMap<>(); // <id,cell>
 
 	}
+
 	/**
 	 * Clears lists of added cells and edges.
 	 */
@@ -88,15 +89,19 @@ public class Model {
 		addedCells.clear();
 		addedEdges.clear();
 	}
+
 	/**
 	 * Returns list of added cells during current update.
+	 * 
 	 * @return list of added cells
 	 */
 	public List<Cell> getAddedCells() {
 		return addedCells;
 	}
+
 	/**
 	 * Returns list of removed cells during current update.
+	 * 
 	 * @return list of removed cells
 	 */
 	public List<Cell> getRemovedCells() {
@@ -105,45 +110,60 @@ public class Model {
 
 	/**
 	 * Returns list of all cells.
+	 * 
 	 * @return list of all cells.
 	 */
 	public List<Cell> getAllCells() {
 		return allCells;
 	}
+
 	/**
 	 * Returns list of added edges during current update.
+	 * 
 	 * @return list of added edges.
 	 */
 	public List<Edge> getAddedEdges() {
 		return addedEdges;
 	}
+
 	/**
 	 * Returns list of removed edges during current update.
+	 * 
 	 * @return list of removed edges.
 	 */
 	public List<Edge> getRemovedEdges() {
 		return removedEdges;
 	}
-/**
- * Returns list of all edges.
- * @return list of all edges.
- */
+
+	/**
+	 * Returns list of all edges.
+	 * 
+	 * @return list of all edges.
+	 */
 	public List<Edge> getAllEdges() {
 		return allEdges;
 	}
-/**
- * Adds new cell of given type to the graph model.
- * @param id
- * @param type
- * @param cellLayer
- * @param parentsID
- */
-	public void addCell(int id, CellType type, int cellLayer, List<Integer> parentsID) {
+
+	/**
+	 * Adds new cell of given type to the graph model.
+	 * 
+	 * @param id
+	 *            cell number
+	 * @param type
+	 *            type of the cell
+	 * @param cellOrder
+	 *            order of added cell
+	 * @param parentsID
+	 *            ID numbers of parent cells
+	 * @param topLayer
+	 *            cells in which added cell is nested in
+	 */
+	public void addCell(int id, CellType type, int cellOrder, List<Integer> parentsID, List<Cell> topLayer) {
 
 		switch (type) {
 
 		case RECTANGLE:
-			RectangleCell rectangleCell = new RectangleCell(id, cellLayer, parentsID);
+			RectangleCell rectangleCell = new RectangleCell(id, cellOrder, parentsID, topLayer);
 			addCell(rectangleCell);
 			break;
 
@@ -152,6 +172,11 @@ public class Model {
 		}
 	}
 
+	/**
+	 * Adds new cell to graph and cell map.
+	 * 
+	 * @param cell
+	 */
 	private void addCell(Cell cell) {
 
 		addedCells.add(cell);
@@ -160,6 +185,12 @@ public class Model {
 
 	}
 
+	/**
+	 * Adds new edge between specified cells.
+	 * 
+	 * @param sourceId
+	 * @param targetId
+	 */
 	public void addEdge(int sourceId, int targetId) {
 
 		Cell sourceCell = cellMap.get(sourceId);
@@ -170,7 +201,9 @@ public class Model {
 		addedEdges.add(edge);
 
 	}
-
+	/**
+	 * Adds all edges to the graph, based on information about cells.
+	 */
 	public void addEdges() {
 
 		cellMap.forEach((cellID, cell) -> {
@@ -194,7 +227,7 @@ public class Model {
 	public void attachOrphansToGraphParent(List<Cell> cellList) {
 
 		for (Cell cell : cellList) {
-			if (cell.getCellTopLayer().size() == 0) {
+			if (cell.getCellParents().size() == 0) {
 				graphParent.addCellChild(cell);
 			}
 		}
@@ -212,7 +245,9 @@ public class Model {
 			graphParent.removeCellChild(cell);
 		}
 	}
-
+	/**
+	 * Refreshes lists of all, added and removed cells.
+	 */
 	public void merge() {
 
 		// cells

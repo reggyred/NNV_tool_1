@@ -7,13 +7,38 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.transform.Scale;
 
+/**
+ * ZoomableScrollPane is extension of JavaFX ScrollPane class. It adds zoom in/out 
+ * functionality.
+ * @author preddig
+ *
+ */
 public class ZoomableScrollPane extends ScrollPane {
+	/**
+	 * Group of nodes that zoom action is performed on.
+	 */
 	Group zoomGroup;
+	/**
+	 * Transformation matrix of zoomed view.
+	 */
 	Scale scaleTransform;
+	/**
+	 * Content of ZoombableScrollPane.
+	 */
 	Node content;
+	/**
+	 * Current scale.
+	 */
 	double scaleValue = 1.0;
+	/**
+	 * Delta of scale change during scrolling.
+	 */
 	double delta = 0.05;
 
+	/**
+	 * Constructs ZoomableScrollPane with given content.
+	 * @param content
+	 */
 	public ZoomableScrollPane(Node content) {
 		this.content = content;
 		Group contentGroup = new Group();
@@ -27,14 +52,25 @@ public class ZoomableScrollPane extends ScrollPane {
 		zoomGroup.setOnScroll(new ZoomHandler());
 	}
 
+	/**
+	 * Returns current scale value.
+	 * @return scale value.
+	 */
 	public double getScaleValue() {
 		return scaleValue;
 	}
 
+	/**
+	 * Resets zoom scale to default (1.0)
+	 */
 	public void zoomToActual() {
 		zoomTo(1.0);
 	}
 
+	/**
+	 * Zooms to given scale value. Rescales view.
+	 * @param scaleValue
+	 */
 	public void zoomTo(double scaleValue) {
 
 		this.scaleValue = scaleValue;
@@ -43,14 +79,9 @@ public class ZoomableScrollPane extends ScrollPane {
 		scaleTransform.setY(scaleValue);
 
 	}
-
-	public void zoomActual() {
-
-		scaleValue = 1;
-		zoomTo(scaleValue);
-
-	}
-
+	/**
+	 * Zooms out by delta factor.
+	 */
 	public void zoomOut() {
 		scaleValue -= delta;
 
@@ -60,7 +91,9 @@ public class ZoomableScrollPane extends ScrollPane {
 
 		zoomTo(scaleValue);
 	}
-
+	/**
+	 * Zooms in by delta factor.
+	 */
 	public void zoomIn() {
 
 		scaleValue += delta;
@@ -74,10 +107,9 @@ public class ZoomableScrollPane extends ScrollPane {
 	}
 
 	/**
-	 * 
+	 * Fits graph to container. Recalculates scale value to required value. 
 	 * @param minimizeOnly
-	 *            If the content fits already into the viewport, then we don't
-	 *            zoom if this parameter is true.
+	 *            if set to true, then graph can be only zoomed out to fit container
 	 */
 	public void zoomToFit(boolean minimizeOnly) {
 
@@ -106,7 +138,11 @@ public class ZoomableScrollPane extends ScrollPane {
 		zoomTo(scale);
 
 	}
-
+/**
+ * Handles mouse scroll event.
+ * @author preddig
+ *
+ */
 	private class ZoomHandler implements EventHandler<ScrollEvent> {
 
 		@Override

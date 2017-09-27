@@ -9,18 +9,32 @@ import pl.sii.nnv.graph.Graph;
  */
 public abstract class Layout {
 
+	/**
+	 * Graph object layout is applied to.
+	 */
 	Graph graph;
-	int maxLayers;
+	/**
+	 * Maximum number of columns (x-axis) of cells.
+	 */
+	int maxColumns;
+	/** 
+	 * Maximum number of orders (y-axis) of cells.
+	 */
 	int maxOrders;
-	
-	
+
+	/**
+	 * Constructor for layout object.
+	 * @param graph to which layout is applied to.
+	 */
     public Layout(Graph graph) {
 
         this.graph = graph;
 
     }
-
-
+    
+    /**
+     * Abstract method that executes layouting algorithm.
+     */
     public abstract void execute();
 
 }
